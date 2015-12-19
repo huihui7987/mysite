@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'blog/base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全文</title>
+</head>
+
+<body>
+{% block content %}
+    <div style="float:right" class="data">
+
+    {% if article.published_date %}
+        {{ article.published_date }}
+    {% else %}
+
+        <a class="btn btn-default" href="{% url 'blog.views.article_publish' pk=article.pk %}">P<span class="glyphicon glyphicon-pencil"></span></a>
+
+    {% endif %}
+        <a class="btn btn-default" href="{% url 'article_edit' pk=article.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'article_remove' pk=article.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+    </div>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.text|linebreaks }}</p>
+    <p>{{ article.image }}</p>
+{% endblock %}
+</body>
+</html>
